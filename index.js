@@ -59,7 +59,7 @@ function mount(config) {
           remote = resolve(path.join(source, file), content);
         } catch (err) {
           throw new Error(
-            `Failed to resolve remote "${remote}" for mount file "${file}": ${err.message}`);
+            `Failed to resolve remote "${content}" for mount file "${file}": ${err.message}`);
         }
         const mount = path.join(path.dirname(file), basename.replace(prefix, ''));
         let stats;
