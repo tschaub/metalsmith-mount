@@ -3,6 +3,7 @@
 const co = require('co');
 const fse = require('co-fs-extra');
 const path = require('path');
+const resolve = require('resolve');
 
 /**
  * Given a path to a source file and a remote, resolve the absolute path to the
@@ -12,12 +13,13 @@ const path = require('path');
  * @param {string} to The remote path.
  * @return {string} The absolute path to the destination.
  */
-function resolve(from, to) {
+function resolveRemote(from, to) {
   let absolute;
+  const base = path.dirname(from);
   if (path.isAbsolute(to)) {
     absolute = to;
   } else if (to.startsWith('.')) {
-    absolute = path.resolve(path.dirname(from), to);
+    absolute = path.resolve(base, to);
   } else {
     let name;
     if (to.startsWith('@')) { // scoped package
@@ -25,8 +27,8 @@ function resolve(from, to) {
     } else {
       name = to.split('/').shift();
     }
-    const dir = path.dirname(require.resolve(name + '/package.json'));
-    absolute = path.join(dir, to.replace(name, ''));
+    const resolved = resolve.sync(name + '/package.json', {basedir: base});
+    absolute = path.join(path.dirname(resolved), to.replace(name, ''));
   }
   return absolute;
 }
@@ -56,7 +58,7 @@ function mount(config) {
         }
         let remote;
         try {
-          remote = resolve(path.join(source, file), content);
+          remote = resolveRemote(path.join(source, file), content);
         } catch (err) {
           throw new Error(
             `Failed to resolve remote "${content}" for mount file "${file}": ${err.message}`);
@@ -83,4 +85,4 @@ function mount(config) {
 }
 
 exports = module.exports = mount;
-exports._resolve = resolve;
+exports._resolveRemote = resolveRemote;
