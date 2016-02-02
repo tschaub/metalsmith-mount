@@ -6,13 +6,13 @@ const path = require('path');
 
 const index = require('./index');
 
-lab.experiment('resolve(from, to)', function() {
-  const resolve = index._resolve;
+lab.experiment('resolveRemote(from, to)', function() {
+  const resolveRemote = index._resolveRemote;
 
   lab.test('returns absolute path if "to" if it is in a package', function(done) {
     const from = 'path/to/source';
     const to = 'code/LICENSE';
-    const absolute = resolve(from, to);
+    const absolute = resolveRemote(from, to);
     expect(path.isAbsolute(absolute)).to.be.true();
     expect(absolute.indexOf('node_modules')).to.be.greaterThan(0);
     done();
@@ -21,13 +21,13 @@ lab.experiment('resolve(from, to)', function() {
   lab.test('returns absolute path if "to" is relative', function(done) {
     const from = 'path/to/source';
     const to = './relative/file';
-    expect(resolve(from, to)).to.equal(path.resolve(path.dirname(from), to));
+    expect(resolveRemote(from, to)).to.equal(path.resolve(path.dirname(from), to));
     done();
   });
 
   lab.test('returns "to" if it is absolute', function(done) {
-    expect(resolve('foo', '/bar')).to.equal('/bar');
-    expect(resolve('/foo', '/bar/bam')).to.equal('/bar/bam');
+    expect(resolveRemote('foo', '/bar')).to.equal('/bar');
+    expect(resolveRemote('/foo', '/bar/bam')).to.equal('/bar/bam');
     done();
   });
 
