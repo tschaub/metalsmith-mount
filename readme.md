@@ -23,7 +23,7 @@ node_modules/
         file2.md
 ```
 
-If the `src/some/@path` mount file has the contents `some-package/sub/directory`, then the files in this directory will be made available to other Metalsmith plugins at `some/path/sub/directory/file1.md` and `some/path/sub/directory/file2.md`.
+If the `src/some/@path` mount file has the contents `some-package/sub/directory`, then the files in this directory will be made available to other Metalsmith plugins at `some/path/file1.md` and `some/path/file2.md`.
 
 ## use
 
