@@ -16,7 +16,7 @@
     "code": "^2.1.0",
     "eslint": "2.4.0",
     "eslint-config-tschaub": "4.0.0",
-    "lab": "^10.0.0",
+    "lab": "^10.5.1",
     "resolve": "^1.1.7"
   },
   "eslintConfig": {
