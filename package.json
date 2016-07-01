@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "code": "^3.0.0",
-    "eslint": "2.11.1",
+    "eslint": "3.0.0",
     "eslint-config-tschaub": "4.0.0",
     "lab": "^10.0.0",
     "resolve": "^1.1.7"
