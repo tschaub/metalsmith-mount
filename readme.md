@@ -1,5 +1,7 @@
 # `metalsmith-mount`
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/tschaub/metalsmith-mount.svg)](https://greenkeeper.io/)
+
 A Metalsmith plugin for mounting additional resources onto a source tree.
 
 ## what it does
